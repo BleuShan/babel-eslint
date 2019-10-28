@@ -3,5 +3,5 @@
 publish-patch:
 	./node_modules/.bin/mocha
 	npm version patch
-	npm publish
+	npm publish --access public
 	git push --follow-tags
