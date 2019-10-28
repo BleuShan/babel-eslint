@@ -1,8 +1,10 @@
 # babel-eslint [![npm](https://img.shields.io/npm/v/@bleushan/babel-eslint.svg)](https://www.npmjs.com/package/@bleushan/babel-eslint/) [![Build Status](https://travis-ci.com/BleuShan/babel-eslint.svg?branch=forked-10.x)](https://travis-ci.com/BleuShan/babel-eslint)
 
-# NOTE
+## NOTE
 
 This is a temporary publishing fork while the folks on upstream sort thing out.
+
+---
 
 **babel-eslint** allows you to lint **ALL** valid Babel code with the fantastic
 [ESLint](https://github.com/eslint/eslint).
