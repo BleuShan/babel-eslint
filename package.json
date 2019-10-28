@@ -1,5 +1,5 @@
 {
-  "name": "babel-eslint",
+  "name": "@bleushan/babel-eslint",
   "version": "10.0.3",
   "description": "Custom parser for ESLint",
   "main": "lib/index.js",
@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/babel/babel-eslint.git"
+    "url": "https://github.com/BleuShan/babel-eslint.git"
   },
   "dependencies": {
     "@babel/code-frame": "^7.0.0",

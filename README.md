@@ -3,6 +3,10 @@
 **babel-eslint** allows you to lint **ALL** valid Babel code with the fantastic
 [ESLint](https://github.com/eslint/eslint).
 
+# NOTE
+
+This is a temporary publishing fork while the folks on upstream sort thing out.
+
 ### Why Use babel-eslint
 
 You only need to use babel-eslint if you are using types (Flow) or experimental features not supported in ESLint itself yet. Otherwise try the default parser (you don't have to use it just because you are using Babel).
@@ -45,12 +49,12 @@ It just needs to export a `parse` method that takes in a string of code and outp
 
 ### Supported ESLint versions
 
-ESLint | babel-eslint
------------- | -------------
-4.x | >= 6.x
-3.x | >= 6.x
-2.x | >= 6.x
-1.x | >= 5.x
+| ESLint | babel-eslint |
+| ------ | ------------ |
+| 4.x    | >= 6.x       |
+| 3.x    | >= 6.x       |
+| 2.x    | >= 6.x       |
+| 1.x    | >= 5.x       |
 
 ### Install
 
