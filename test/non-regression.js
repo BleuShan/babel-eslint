@@ -2,6 +2,7 @@
 "use strict";
 var eslint = require("eslint");
 var unpad = require("dedent");
+var parser = require("..");
 
 function verifyAndAssertMessagesWithSpecificESLint(
   code,
@@ -12,12 +13,9 @@ function verifyAndAssertMessagesWithSpecificESLint(
   linter
 ) {
   var config = {
-    parser: require.resolve(".."),
+    parser: "current-babel-eslint",
     rules,
-    env: {
-      node: true,
-      es6: true,
-    },
+    env: { node: true, es6: true },
     parserOptions: {
       ecmaVersion: 2018,
       ecmaFeatures: {
@@ -68,13 +66,15 @@ function verifyAndAssertMessages(
   sourceType,
   overrideConfig
 ) {
+  const linter = new eslint.Linter();
+  linter.defineParser("current-babel-eslint", parser);
   verifyAndAssertMessagesWithSpecificESLint(
     unpad(`${code}`),
     rules || {},
     expectedMessages || [],
     sourceType,
     overrideConfig,
-    new eslint.Linter()
+    linter
   );
 }
 
@@ -1562,7 +1562,7 @@ describe("verify", () => {
       "var leakedGlobal = 1;",
       { "no-implicit-globals": 1 },
       [
-        "1:5 Implicit global variable, assign as global property instead. no-implicit-globals",
+        "1:5 Unexpected 'var' declaration in the global scope, wrap in an IIFE for a local variable, assign as global property for a global variable. no-implicit-globals",
       ],
       "script",
       {

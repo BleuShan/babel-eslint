@@ -23,7 +23,7 @@ describe("https://github.com/babel/babel-eslint/issues/558", () => {
    */
   it("does not visit type annotations multiple times after monkeypatching and calling parseForESLint()", () => {
     assertImplementsAST(
-      espree.parse("foo", { sourceType: "module" }),
+      espree.parse("foo", { ecmaVersion: 2018, sourceType: "module" }),
       babelEslint.parse("foo", {})
     );
     const parseResult = babelEslint.parseForESLint(

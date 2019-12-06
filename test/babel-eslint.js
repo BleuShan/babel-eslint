@@ -37,7 +37,7 @@ function parseAndAssertSame(code) {
     range: true,
     comment: true,
     attachComment: true,
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: "module",
   });
   var babylonAST = babelEslint.parseForESLint(code, {
@@ -261,11 +261,11 @@ describe("babylon-to-espree", () => {
   });
 
   it("export named", () => {
-    parseAndAssertSame("export { foo };");
+    parseAndAssertSame("const foo = 1; export { foo };");
   });
 
   it("export named alias", () => {
-    parseAndAssertSame("export { foo as bar };");
+    parseAndAssertSame("const foo = 1; export { foo as bar };");
   });
 
   // Espree doesn't support the optional chaining operator yet
@@ -386,6 +386,16 @@ describe("babylon-to-espree", () => {
     `);
   });
 
+  it("hash (token)", () => {
+    const code = "class A { #x }";
+    const babylonAST = babelEslint.parseForESLint(code, {
+      eslintVisitorKeys: true,
+      eslintScopeManager: true,
+    }).ast;
+    assert.strictEqual(babylonAST.tokens[3].type, "Punctuator");
+    assert.strictEqual(babylonAST.tokens[3].value, "#");
+  });
+
   it("empty block with comment", () => {
     parseAndAssertSame(`
       function a () {
@@ -471,7 +481,9 @@ describe("babylon-to-espree", () => {
     });
 
     it("super outside method", () => {
-      parseAndAssertSame("function F() { super(); }");
+      assert.throws(() => {
+        parseAndAssertSame("function F() { super(); }");
+      }, /SyntaxError: 'super' keyword outside a method/);
     });
 
     it("StringLiteral", () => {
