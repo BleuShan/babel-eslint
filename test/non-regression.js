@@ -20,7 +20,6 @@ function verifyAndAssertMessagesWithSpecificESLint(
       ecmaVersion: 2018,
       ecmaFeatures: {
         jsx: true,
-        experimentalObjectRestSpread: true,
         globalReturn: true,
       },
       sourceType,
@@ -1759,6 +1758,35 @@ describe("verify", () => {
             }
         `,
         { "no-unused-vars": 1 }
+      );
+    });
+  });
+
+  describe("private class methods", () => {
+    it("should not be undefined", () => {
+      verifyAndAssertMessages(
+        `class C {
+            #d() {
+
+            }
+         }`,
+        { "no-undef": 1 }
+      );
+    });
+
+    it("should not be undefined on oneline", () => {
+      verifyAndAssertMessages(`class C { #d() {}}`, { "no-undef": 1 });
+    });
+
+    it("should not be undefined on with args", () => {
+      verifyAndAssertMessages(`class C { #d(a) {}}`, { "no-undef": 1 });
+    });
+
+    it("should report be unused on with args", () => {
+      verifyAndAssertMessages(
+        `export class C { #d(a) {return 1}}`,
+        { "no-unused-vars": 1 },
+        ["1:21 'a' is defined but never used. no-unused-vars"]
       );
     });
   });

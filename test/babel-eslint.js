@@ -29,8 +29,6 @@ function parseAndAssertSame(code) {
       globalReturn: true,
       // enable implied strict mode (if ecmaVersion >= 5)
       impliedStrict: true,
-      // allow experimental object rest/spread
-      experimentalObjectRestSpread: true,
     },
     tokens: true,
     loc: true,
